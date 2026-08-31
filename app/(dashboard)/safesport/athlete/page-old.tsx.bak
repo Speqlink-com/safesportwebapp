@@ -1,0 +1,355 @@
+"use client"
+
+import { SafeSportSidebar } from "@/components/safesport-sidebar"
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbList,
+  BreadcrumbPage,
+} from "@/components/ui/breadcrumb"
+import { Separator } from "@/components/ui/separator"
+import {
+  SidebarInset,
+  SidebarProvider,
+  SidebarTrigger,
+} from "@/components/ui/sidebar"
+import { Card } from "@/components/ui/card"
+import { Badge } from "@/components/ui/badge"
+import { Avatar, AvatarFallback } from "@/components/ui/avatar"
+import { Button } from "@/components/ui/button"
+import { Progress } from "@/components/ui/progress"
+import ThemeSwitcher from "@/components/theme_switcher"
+import { 
+  mockAthletes,
+  mockPPEAssessments,
+  mockIncidents,
+  mockScreenings,
+  mockSchedule,
+  mockNotifications,
+} from "@/features/safesport/data/mock-data"
+import { athleteNavData } from "@/features/safesport/data/athlete-nav"
+import { 
+  ShieldCheckIcon,
+  CalendarIcon,
+  ActivityIcon,
+  FileTextIcon,
+  AlertCircleIcon,
+  TrendingUpIcon,
+  CheckCircle2Icon,
+} from "lucide-react"
+import { getOnboardingDataByAthleteId } from "@/features/safesport/data/onboarding-data"
+
+export default function AthleteDashboardPage() {
+  // Get logged-in athlete (using Brian Otieno as example)
+  const athlete = mockAthletes[0] // Brian Otieno
+  const athletePPE = mockPPEAssessments.filter(p => p.athleteId === athlete.id)
+  const athleteIncidents = mockIncidents.filter(i => i.athleteId === athlete.id)
+  const athleteScreenings = mockScreenings.filter(s => s.athleteId === athlete.id)
+  const athleteSchedule = mockSchedule.filter(e => e.athleteId === athlete.id)
+  const onboardingData = getOnboardingDataByAthleteId(athlete.id)
+  
+  const today = new Date().toLocaleDateString('en-US', { 
+    weekday: 'long', 
+    year: 'numeric', 
+    month: 'long', 
+    day: 'numeric' 
+  })
+
+  return (
+    <SidebarProvider>
+      <SafeSportSidebar navData={athleteNavData} />
+      <SidebarInset>
+        <header className="flex h-16 shrink-0 items-center justify-between gap-2 border-b px-4">
+          <div className="flex items-center gap-2">
+            <SidebarTrigger className="-ml-1" />
+            <Separator orientation="vertical" className="mr-2 h-4" />
+            <Breadcrumb>
+              <BreadcrumbList>
+                <BreadcrumbItem>
+                  <BreadcrumbPage>My Dashboard</BreadcrumbPage>
+                </BreadcrumbItem>
+              </BreadcrumbList>
+            </Breadcrumb>
+          </div>
+          <ThemeSwitcher />
+        </header>
+
+        <div className="flex flex-1 flex-col gap-6 p-6">
+          {/* Header */}
+          <div className="flex items-start justify-between">
+            <div>
+              <h1 className="text-2xl font-semibold">Welcome back, {athlete.firstName}</h1>
+              <p className="text-sm text-muted-foreground">{today}</p>
+            </div>
+            <Avatar className="size-16">
+              <AvatarFallback className="text-lg">
+                {athlete.firstName[0]}{athlete.lastName[0]}
+              </AvatarFallback>
+            </Avatar>
+          </div>
+
+          {/* Compact Profile Progress Card - Only if incomplete */}
+          {onboardingData && !onboardingData.progress.isComplete && (
+            <Card className="p-4">
+              <div className="flex items-center justify-between gap-4">
+                <div className="flex-1">
+                  <div className="flex items-center gap-3 mb-2">
+                    <h3 className="font-medium">Complete your SafeSport profile</h3>
+                    <Badge variant="outline" className="font-mono text-xs">
+                      {onboardingData.progress.overall}%
+                    </Badge>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <Progress value={onboardingData.progress.overall} className="h-2 flex-1" />
+                    <span className="text-sm text-muted-foreground whitespace-nowrap">
+                      {Object.values(onboardingData.progress.sections).filter(s => s !== "complete" && s !== "not_applicable").length} sections remaining
+                    </span>
+                  </div>
+                </div>
+                <Button onClick={() => window.location.href = "/safesport/athlete/profile"}>
+                  Continue setup
+                </Button>
+              </div>
+            </Card>
+          )}
+
+          {/* Profile Complete Card */}
+          {onboardingData?.state === "ready_for_ppe" && (
+            <Card className="border-primary/20 bg-primary/5 p-4">
+              <div className="flex items-center justify-between gap-4">
+                <div className="flex items-center gap-3">
+                  <CheckCircle2Icon className="size-5 text-primary" />
+                  <div>
+                    <p className="font-medium">SafeSport profile complete</p>
+                    <p className="text-sm text-muted-foreground">
+                      Your information is ready for clinical assessment • <span className="text-amber-600">Awaiting clinician</span>
+                    </p>
+                  </div>
+                </div>
+                <Button variant="outline" size="sm" onClick={() => window.location.href = "/safesport/athlete/profile"}>
+                  View profile
+                </Button>
+              </div>
+            </Card>
+          )}
+
+          {/* Athlete Info Card */}
+          <Card className="p-6">
+            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+              <div>
+                <p className="text-sm text-muted-foreground">SafeSport ID</p>
+                <p className="text-lg font-semibold">{athlete.id}</p>
+              </div>
+              <div>
+                <p className="text-sm text-muted-foreground">Organization</p>
+                <p className="text-lg font-semibold">{athlete.currentOrganization?.name}</p>
+              </div>
+              <div>
+                <p className="text-sm text-muted-foreground">Team</p>
+                <p className="text-lg font-semibold">{athlete.currentTeam?.name}</p>
+              </div>
+              <div>
+                <p className="text-sm text-muted-foreground">Sport</p>
+                <p className="text-lg font-semibold">{athlete.currentSport?.name}</p>
+              </div>
+            </div>
+          </Card>
+
+          {/* Current Status */}
+          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+            <Card className="p-6">
+              <div className="flex items-center gap-3">
+                <div className="flex size-12 items-center justify-center rounded-lg bg-primary/10">
+                  <ShieldCheckIcon className="size-6 text-primary" />
+                </div>
+                <div className="flex-1">
+                  <p className="text-sm text-muted-foreground">Eligibility Status</p>
+                  <div className="flex items-center gap-2">
+                    <Badge variant={athlete.eligibilityStatus === "cleared" ? "default" : "outline"}>
+                      {athlete.eligibilityStatus.replace(/_/g, " ")}
+                    </Badge>
+                  </div>
+                </div>
+              </div>
+            </Card>
+
+            <Card className="p-6">
+              <div className="flex items-center gap-3">
+                <div className="flex size-12 items-center justify-center rounded-lg bg-secondary/10">
+                  <ActivityIcon className="size-6 text-secondary" />
+                </div>
+                <div className="flex-1">
+                  <p className="text-sm text-muted-foreground">Readiness</p>
+                  <Badge variant={athlete.readiness === "ready" ? "default" : "outline"}>
+                    {athlete.readiness.replace(/_/g, " ")}
+                  </Badge>
+                </div>
+              </div>
+            </Card>
+
+            <Card className="p-6">
+              <div className="flex items-center gap-3">
+                <div className="flex size-12 items-center justify-center rounded-lg bg-accent/10">
+                  <CalendarIcon className="size-6 text-accent-foreground" />
+                </div>
+                <div className="flex-1">
+                  <p className="text-sm text-muted-foreground">Next Review</p>
+                  <p className="font-medium">{athlete.nextReview ? new Date(athlete.nextReview).toLocaleDateString() : "N/A"}</p>
+                </div>
+              </div>
+            </Card>
+          </div>
+
+          <div className="grid gap-6 lg:grid-cols-2">
+            {/* My Schedule */}
+            <Card className="p-6">
+              <div className="mb-4 flex items-center justify-between">
+                <h2 className="text-lg font-semibold">My Schedule</h2>
+                <CalendarIcon className="size-5 text-muted-foreground" />
+              </div>
+              {athleteSchedule.length > 0 ? (
+                <div className="space-y-3">
+                  {athleteSchedule.map((event) => (
+                    <div key={event.id} className="flex gap-3 rounded-lg border p-3">
+                      <div className="text-sm text-muted-foreground">
+                        {new Date(event.startTime).toLocaleTimeString('en-US', { 
+                          hour: '2-digit', 
+                          minute: '2-digit' 
+                        })}
+                      </div>
+                      <div className="flex-1">
+                        <p className="font-medium">{event.title}</p>
+                        <p className="text-sm text-muted-foreground">{event.location}</p>
+                      </div>
+                      <Badge variant={event.status === "scheduled" ? "outline" : "default"}>
+                        {event.status}
+                      </Badge>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <p className="text-sm text-muted-foreground">No upcoming appointments</p>
+              )}
+            </Card>
+
+            {/* My Assessments */}
+            <Card className="p-6">
+              <div className="mb-4 flex items-center justify-between">
+                <h2 className="text-lg font-semibold">My Assessments</h2>
+                <FileTextIcon className="size-5 text-muted-foreground" />
+              </div>
+              {athletePPE.length > 0 ? (
+                <div className="space-y-3">
+                  {athletePPE.map((ppe) => (
+                    <div key={ppe.id} className="rounded-lg border p-3">
+                      <div className="mb-1 flex items-center justify-between">
+                        <p className="font-medium">PPE Assessment</p>
+                        <Badge variant={ppe.status === "complete" ? "default" : "outline"}>
+                          {ppe.status.replace(/_/g, " ")}
+                        </Badge>
+                      </div>
+                      <p className="text-sm text-muted-foreground">
+                        {new Date(ppe.assessmentDate).toLocaleDateString()}
+                      </p>
+                      <p className="text-sm text-muted-foreground">
+                        Clinician: {ppe.clinicianName}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <p className="text-sm text-muted-foreground">No assessments recorded</p>
+              )}
+            </Card>
+
+            {/* My Screenings */}
+            <Card className="p-6">
+              <div className="mb-4 flex items-center justify-between">
+                <h2 className="text-lg font-semibold">Movement Screenings</h2>
+                <TrendingUpIcon className="size-5 text-muted-foreground" />
+              </div>
+              {athleteScreenings.length > 0 ? (
+                <div className="space-y-3">
+                  {athleteScreenings.map((screening) => (
+                    <div key={screening.id} className="rounded-lg border p-3">
+                      <div className="mb-1 flex items-center justify-between">
+                        <p className="font-medium">{screening.drill.replace(/_/g, " ")}</p>
+                        <Badge variant="outline">{screening.status.replace(/_/g, " ")}</Badge>
+                      </div>
+                      <p className="text-sm text-muted-foreground">
+                        {new Date(screening.createdAt).toLocaleDateString()}
+                      </p>
+                      {screening.aiResult && (
+                        <div className="mt-2 flex items-center gap-2">
+                          <Badge variant={
+                            screening.aiResult.riskLevel === "high" ? "destructive" :
+                            screening.aiResult.riskLevel === "moderate" ? "outline" : "default"
+                          }>
+                            {screening.aiResult.riskLevel} risk
+                          </Badge>
+                        </div>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <p className="text-sm text-muted-foreground">No screenings performed</p>
+              )}
+            </Card>
+
+            {/* Recent Activity */}
+            <Card className="p-6">
+              <div className="mb-4 flex items-center justify-between">
+                <h2 className="text-lg font-semibold">Recent Activity</h2>
+                <AlertCircleIcon className="size-5 text-muted-foreground" />
+              </div>
+              {athleteIncidents.length > 0 ? (
+                <div className="space-y-3">
+                  {athleteIncidents.map((incident) => (
+                    <div key={incident.id} className="rounded-lg border p-3">
+                      <div className="mb-1 flex items-center justify-between">
+                        <p className="font-medium">{incident.type.replace(/_/g, " ")}</p>
+                        <Badge variant={incident.severity === "severe" ? "destructive" : "outline"}>
+                          {incident.severity}
+                        </Badge>
+                      </div>
+                      <p className="text-sm">{incident.description}</p>
+                      <p className="mt-1 text-sm text-muted-foreground">
+                        {new Date(incident.incidentDate).toLocaleDateString()}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <p className="text-sm text-muted-foreground">No recent incidents</p>
+              )}
+            </Card>
+          </div>
+
+          {/* Notifications */}
+          <Card className="p-6">
+            <div className="mb-4 flex items-center gap-2">
+              <h2 className="text-lg font-semibold">My Notifications</h2>
+            </div>
+            <div className="space-y-2">
+              {mockNotifications.slice(0, 2).map((notif) => (
+                <div key={notif.id} className="flex items-start gap-3 rounded-lg border p-3">
+                  <div className="flex-1">
+                    <div className="flex items-center gap-2">
+                      <p className="font-medium">{notif.title}</p>
+                      {!notif.read && <div className="size-2 rounded-full bg-primary" />}
+                    </div>
+                    <p className="text-sm text-muted-foreground">{notif.message}</p>
+                  </div>
+                  <Badge variant={notif.priority === "high" ? "destructive" : "outline"}>
+                    {notif.priority}
+                  </Badge>
+                </div>
+              ))}
+            </div>
+          </Card>
+        </div>
+      </SidebarInset>
+    </SidebarProvider>
+  )
+}

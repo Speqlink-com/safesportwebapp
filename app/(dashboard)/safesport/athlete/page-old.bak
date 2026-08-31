@@ -1,0 +1,538 @@
+"use client"
+
+import { SafeSportSidebar } from "@/components/safesport-sidebar"
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbList,
+  BreadcrumbPage,
+} from "@/components/ui/breadcrumb"
+import { Separator } from "@/components/ui/separator"
+import {
+  SidebarInset,
+  SidebarProvider,
+  SidebarTrigger,
+} from "@/components/ui/sidebar"
+import { Card } from "@/components/ui/card"
+import { Badge } from "@/components/ui/badge"
+import { Avatar, AvatarFallback } from "@/components/ui/avatar"
+import { Button } from "@/components/ui/button"
+import ThemeSwitcher from "@/components/theme_switcher"
+import { 
+  mockAthletes,
+  mockPPEAssessments,
+  mockIncidents,
+  mockScreenings,
+  mockSchedule,
+} from "@/features/safesport/data/mock-data"
+import { athleteNavData } from "@/features/safesport/data/athlete-nav"
+import { 
+  ShieldCheckIcon,
+  CalendarIcon,
+  AlertCircleIcon,
+  TrendingUpIcon,
+  CheckCircle2Icon,
+  ArrowRightIcon,
+  ActivityIcon,
+  ClockIcon,
+} from "lucide-react"
+import { getOnboardingDataByAthleteId } from "@/features/safesport/data/onboarding-data"
+import { 
+  LineChart, 
+  Line, 
+  AreaChart,
+  Area,
+  RadialBarChart,
+  RadialBar,
+  ResponsiveContainer,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+  PieChart,
+  Pie,
+  Cell,
+} from 'recharts'
+
+export default function AthleteDashboardPage() {
+  // Get logged-in athlete (using Brian Otieno as example)
+  const athlete = mockAthletes[0] // Brian Otieno
+  const athletePPE = mockPPEAssessments.filter(p => p.athleteId === athlete.id)
+  const athleteIncidents = mockIncidents.filter(i => i.athleteId === athlete.id)
+  const athleteScreenings = mockScreenings.filter(s => s.athleteId === athlete.id)
+  const athleteSchedule = mockSchedule.filter(e => e.athleteId === athlete.id)
+  const onboardingData = getOnboardingDataByAthleteId(athlete.id)
+  
+  const today = new Date().toLocaleDateString('en-US', { 
+    weekday: 'long', 
+    year: 'numeric', 
+    month: 'long', 
+    day: 'numeric' 
+  })
+
+  // Activity timeline data (last 30 days)
+  const activityData = [
+    { date: 'Aug 1', screenings: 0, assessments: 0, incidents: 0 },
+    { date: 'Aug 5', screenings: 1, assessments: 0, incidents: 0 },
+    { date: 'Aug 10', screenings: 0, assessments: 0, incidents: 1 },
+    { date: 'Aug 15', screenings: 0, assessments: 1, incidents: 0 },
+    { date: 'Aug 18', screenings: 1, assessments: 0, incidents: 0 },
+    { date: 'Aug 22', screenings: 0, assessments: 0, incidents: 0 },
+    { date: 'Aug 26', screenings: 1, assessments: 0, incidents: 0 },
+    { date: 'Aug 30', screenings: 0, assessments: 0, incidents: 0 },
+  ]
+
+  // Profile completion for radial chart
+  const profileCompletion = onboardingData?.progress.overall || 100
+  const profileData = [
+    { name: 'Complete', value: profileCompletion, fill: '#72E34D' },
+    { name: 'Remaining', value: 100 - profileCompletion, fill: '#e5e7eb' },
+  ]
+
+  // Activity distribution
+  const activityDistribution = [
+    { name: 'Screenings', value: athleteScreenings.length, fill: '#72E34D' },
+    { name: 'Assessments', value: athletePPE.length, fill: '#174D16' },
+    { name: 'Incidents', value: athleteIncidents.length, fill: '#f59e0b' },
+  ]
+
+  // Next review date calculation
+  const nextReviewDate = athlete.nextReview ? new Date(athlete.nextReview) : null
+  const daysUntilReview = nextReviewDate 
+    ? Math.ceil((nextReviewDate.getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24))
+    : null
+
+  return (
+    <SidebarProvider>
+      <SafeSportSidebar navData={athleteNavData} />
+      <SidebarInset>
+        <header className="flex h-16 shrink-0 items-center justify-between gap-2 border-b px-4">
+          <div className="flex items-center gap-2">
+            <SidebarTrigger className="-ml-1" />
+            <Separator orientation="vertical" className="mr-2 h-4" />
+            <Breadcrumb>
+              <BreadcrumbList>
+                <BreadcrumbItem>
+                  <BreadcrumbPage>My Dashboard</BreadcrumbPage>
+                </BreadcrumbItem>
+              </BreadcrumbList>
+            </Breadcrumb>
+          </div>
+          <ThemeSwitcher />
+        </header>
+
+        <div className="flex flex-1 flex-col gap-6 p-6 max-w-[1600px] mx-auto w-full">
+          {/* Welcome Header */}
+          <div className="flex items-start justify-between">
+            <div>
+              <h1 className="text-3xl font-semibold tracking-tight">Welcome back, {athlete.firstName}</h1>
+              <p className="text-sm text-muted-foreground mt-1">{today}</p>
+              
+              {/* Compact Athlete Identity */}
+              <div className="flex items-center gap-4 mt-4 text-sm">
+                <div className="flex items-center gap-2">
+                  <span className="text-muted-foreground">ID</span>
+                  <Badge variant="outline" className="font-mono">{athlete.id}</Badge>
+                </div>
+                <Separator orientation="vertical" className="h-4" />
+                <div className="flex items-center gap-2">
+                  <span className="text-muted-foreground">{athlete.currentOrganization?.name}</span>
+                </div>
+                <Separator orientation="vertical" className="h-4" />
+                <div className="flex items-center gap-2">
+                  <span className="text-muted-foreground">{athlete.currentTeam?.name}</span>
+                </div>
+                <Separator orientation="vertical" className="h-4" />
+                <div className="flex items-center gap-2">
+                  <span className="text-muted-foreground">{athlete.currentSport?.name}</span>
+                </div>
+              </div>
+            </div>
+            <Avatar className="size-20 border-2 border-primary/20">
+              <AvatarFallback className="text-xl bg-primary/10">
+                {athlete.firstName[0]}{athlete.lastName[0]}
+              </AvatarFallback>
+            </Avatar>
+          </div>
+
+          {/* Profile Completion Action - Compact */}
+          {onboardingData && !onboardingData.progress.isComplete && (
+            <Card className="bg-gradient-to-r from-primary/5 to-primary/10 border-primary/20">
+              <div className="p-4 flex items-center justify-between gap-4">
+                <div className="flex items-center gap-4 flex-1">
+                  <div className="flex items-center justify-center size-12 rounded-full bg-primary/20">
+                    <CheckCircle2Icon className="size-6 text-primary" />
+                  </div>
+                  <div className="flex-1">
+                    <div className="flex items-center gap-2 mb-1">
+                      <h3 className="font-semibold">Complete your SafeSport profile</h3>
+                      <Badge variant="outline" className="font-mono text-xs">
+                        {onboardingData.progress.overall}%
+                      </Badge>
+                    </div>
+                    <p className="text-sm text-muted-foreground">
+                      {Object.values(onboardingData.progress.sections).filter(s => s !== "complete" && s !== "not_applicable").length} sections remaining
+                    </p>
+                  </div>
+                </div>
+                <Button onClick={() => window.location.href = "/safesport/athlete/profile"} className="gap-2">
+                  Continue setup
+                  <ArrowRightIcon className="size-4" />
+                </Button>
+              </div>
+            </Card>
+          )}
+
+          {/* Primary Status Section */}
+          <div className="grid gap-4 md:grid-cols-3">
+            {/* Eligibility Status - Most Important */}
+            <Card className="md:col-span-2 border-2">
+              <div className="p-6">
+                <div className="flex items-start justify-between mb-4">
+                  <div>
+                    <p className="text-sm text-muted-foreground uppercase tracking-wide font-medium mb-2">
+                      Current Eligibility
+                    </p>
+                    <div className="flex items-center gap-3">
+                      <Badge 
+                        variant={athlete.eligibilityStatus === "cleared" ? "default" : "outline"}
+                        className="text-base px-3 py-1"
+                      >
+                        {athlete.eligibilityStatus === "cleared" ? "✓ CLEARED" : athlete.eligibilityStatus.replace(/_/g, " ").toUpperCase()}
+                      </Badge>
+                      {athlete.eligibilityStatus !== "cleared" && (
+                        <span className="text-sm text-muted-foreground">+ Monitoring</span>
+                      )}
+                    </div>
+                  </div>
+                  <ShieldCheckIcon className="size-8 text-primary opacity-50" />
+                </div>
+                
+                {nextReviewDate && (
+                  <div className="space-y-2">
+                    <Separator />
+                    <div className="flex items-center justify-between pt-2">
+                      <div className="flex items-center gap-2 text-sm">
+                        <ClockIcon className="size-4 text-muted-foreground" />
+                        <span className="text-muted-foreground">Next review:</span>
+                        <span className="font-medium">{nextReviewDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</span>
+                      </div>
+                      {daysUntilReview !== null && (
+                        <Badge variant="outline" className="text-xs">
+                          {daysUntilReview} days
+                        </Badge>
+                      )}
+                    </div>
+                  </div>
+                )}
+              </div>
+            </Card>
+
+            {/* Readiness */}
+            <Card>
+              <div className="p-6">
+                <p className="text-sm text-muted-foreground uppercase tracking-wide font-medium mb-2">
+                  Readiness
+                </p>
+                <div className="flex items-center gap-2 mb-1">
+                  <ActivityIcon className="size-5 text-primary" />
+                  <Badge variant={athlete.readiness === "ready" ? "default" : "outline"} className="text-sm">
+                    {athlete.readiness.replace(/_/g, " ")}
+                  </Badge>
+                </div>
+                <p className="text-xs text-muted-foreground mt-3">
+                  Participation status
+                </p>
+              </div>
+            </Card>
+          </div>
+
+          {/* Charts and Timeline Row */}
+          <div className="grid gap-6 lg:grid-cols-3">
+            {/* Activity Timeline Chart */}
+            <Card className="lg:col-span-2">
+              <div className="p-6">
+                <div className="flex items-center justify-between mb-6">
+                  <div>
+                    <h3 className="font-semibold text-lg">SafeSport Activity</h3>
+                    <p className="text-sm text-muted-foreground">Recent events and screenings</p>
+                  </div>
+                  <Button variant="ghost" size="sm" onClick={() => window.location.href = "/safesport/athlete/timeline"}>
+                    View all
+                    <ArrowRightIcon className="size-4 ml-2" />
+                  </Button>
+                </div>
+                <ResponsiveContainer width="100%" height={200}>
+                  <AreaChart data={activityData}>
+                    <defs>
+                      <linearGradient id="colorActivity" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="5%" stopColor="#72E34D" stopOpacity={0.3}/>
+                        <stop offset="95%" stopColor="#72E34D" stopOpacity={0}/>
+                      </linearGradient>
+                    </defs>
+                    <CartesianGrid strokeDasharray="3 3" className="stroke-muted" />
+                    <XAxis 
+                      dataKey="date" 
+                      className="text-xs" 
+                      tick={{ fill: 'hsl(var(--muted-foreground))' }}
+                    />
+                    <YAxis 
+                      className="text-xs"
+                      tick={{ fill: 'hsl(var(--muted-foreground))' }}
+                    />
+                    <Tooltip 
+                      contentStyle={{ 
+                        backgroundColor: 'hsl(var(--card))',
+                        border: '1px solid hsl(var(--border))',
+                        borderRadius: '8px',
+                      }}
+                    />
+                    <Area 
+                      type="monotone" 
+                      dataKey="screenings" 
+                      stroke="#72E34D" 
+                      fill="url(#colorActivity)" 
+                      name="Screenings"
+                    />
+                  </AreaChart>
+                </ResponsiveContainer>
+              </div>
+            </Card>
+
+            {/* Profile Completion Radial */}
+            <Card>
+              <div className="p-6">
+                <h3 className="font-semibold text-lg mb-1">Profile Progress</h3>
+                <p className="text-sm text-muted-foreground mb-4">Setup completion</p>
+                <div className="flex items-center justify-center">
+                  <ResponsiveContainer width="100%" height={180}>
+                    <RadialBarChart 
+                      cx="50%" 
+                      cy="50%" 
+                      innerRadius="70%" 
+                      outerRadius="100%" 
+                      data={[{ value: profileCompletion, fill: '#72E34D' }]}
+                      startAngle={90}
+                      endAngle={-270}
+                    >
+                      <RadialBar
+                        background
+                        dataKey="value"
+                        cornerRadius={10}
+                      />
+                      <text 
+                        x="50%" 
+                        y="50%" 
+                        textAnchor="middle" 
+                        dominantBaseline="middle"
+                        className="fill-foreground"
+                      >
+                        <tspan x="50%" dy="-0.5em" className="text-3xl font-bold">{profileCompletion}%</tspan>
+                        <tspan x="50%" dy="1.5em" className="text-sm fill-muted-foreground">Complete</tspan>
+                      </text>
+                    </RadialBarChart>
+                  </ResponsiveContainer>
+                </div>
+                {profileCompletion < 100 && (
+                  <Button 
+                    variant="outline" 
+                    size="sm" 
+                    className="w-full mt-4"
+                    onClick={() => window.location.href = "/safesport/athlete/profile"}
+                  >
+                    Complete profile
+                  </Button>
+                )}
+              </div>
+            </Card>
+          </div>
+
+          {/* Movement Screening & Schedule Row */}
+          <div className="grid gap-6 lg:grid-cols-2">
+            {/* Latest Movement Screening */}
+            {athleteScreenings.length > 0 && (
+              <Card>
+                <div className="p-6">
+                  <div className="flex items-center justify-between mb-4">
+                    <div>
+                      <h3 className="font-semibold text-lg">Movement Screening</h3>
+                      <p className="text-sm text-muted-foreground">Latest assessment</p>
+                    </div>
+                    <TrendingUpIcon className="size-5 text-muted-foreground" />
+                  </div>
+                  
+                  {athleteScreenings[0] && (
+                    <div className="space-y-3">
+                      <div className="flex items-center justify-between p-3 rounded-lg bg-muted/50">
+                        <div>
+                          <p className="font-medium">{athleteScreenings[0].drill.replace(/_/g, " ")}</p>
+                          <p className="text-xs text-muted-foreground">
+                            {new Date(athleteScreenings[0].createdAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
+                          </p>
+                        </div>
+                        <Badge variant="outline">
+                          {athleteScreenings[0].status.replace(/_/g, " ")}
+                        </Badge>
+                      </div>
+                      
+                      {athleteScreenings[0].aiResult && (
+                        <div className="space-y-2">
+                          <Separator />
+                          <div className="flex items-center justify-between">
+                            <span className="text-sm text-muted-foreground">AI movement-risk signal</span>
+                            <Badge 
+                              variant={
+                                athleteScreenings[0].aiResult.riskLevel === "high" ? "destructive" :
+                                athleteScreenings[0].aiResult.riskLevel === "moderate" ? "outline" : "default"
+                              }
+                            >
+                              {athleteScreenings[0].aiResult.riskLevel.toUpperCase()}
+                            </Badge>
+                          </div>
+                          <p className="text-xs text-muted-foreground">
+                            Awaiting clinician review • Not a medical diagnosis
+                          </p>
+                        </div>
+                      )}
+                      
+                      <Button 
+                        variant="outline" 
+                        size="sm" 
+                        className="w-full"
+                        onClick={() => window.location.href = "/safesport/athlete/screenings"}
+                      >
+                        View all screenings
+                      </Button>
+                    </div>
+                  )}
+                </div>
+              </Card>
+            )}
+
+            {/* Upcoming Schedule */}
+            <Card>
+              <div className="p-6">
+                <div className="flex items-center justify-between mb-4">
+                  <div>
+                    <h3 className="font-semibold text-lg">Upcoming</h3>
+                    <p className="text-sm text-muted-foreground">Schedule and events</p>
+                  </div>
+                  <CalendarIcon className="size-5 text-muted-foreground" />
+                </div>
+                
+                <div className="space-y-3">
+                  {athleteSchedule.slice(0, 3).map((event) => (
+                    <div key={event.id} className="flex gap-3 p-3 rounded-lg bg-muted/50 hover:bg-muted transition-colors">
+                      <div className="flex flex-col items-center justify-center px-3 py-2 rounded bg-primary/10 min-w-[60px]">
+                        <span className="text-xs text-muted-foreground">
+                          {new Date(event.startTime).toLocaleDateString('en-US', { month: 'short' })}
+                        </span>
+                        <span className="text-2xl font-bold text-primary">
+                          {new Date(event.startTime).getDate()}
+                        </span>
+                      </div>
+                      <div className="flex-1">
+                        <p className="font-medium text-sm">{event.title}</p>
+                        <p className="text-xs text-muted-foreground mt-1">
+                          {new Date(event.startTime).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })}
+                          {event.location && ` • ${event.location}`}
+                        </p>
+                      </div>
+                    </div>
+                  ))}
+                  
+                  {athleteSchedule.length === 0 && (
+                    <div className="text-center py-8 text-sm text-muted-foreground">
+                      No upcoming appointments
+                    </div>
+                  )}
+                </div>
+              </div>
+            </Card>
+          </div>
+
+          {/* Recent Activity Timeline */}
+          <Card>
+            <div className="p-6">
+              <div className="flex items-center justify-between mb-4">
+                <div>
+                  <h3 className="font-semibold text-lg">Recent Activity</h3>
+                  <p className="text-sm text-muted-foreground">Your SafeSport timeline</p>
+                </div>
+                <Button 
+                  variant="ghost" 
+                  size="sm"
+                  onClick={() => window.location.href = "/safesport/athlete/timeline"}
+                >
+                  View timeline
+                  <ArrowRightIcon className="size-4 ml-2" />
+                </Button>
+              </div>
+              
+              <div className="space-y-4">
+                {/* Timeline items */}
+                {athleteScreenings.length > 0 && (
+                  <div className="flex gap-4">
+                    <div className="flex flex-col items-center">
+                      <div className="flex size-2 rounded-full bg-primary" />
+                      <div className="w-px flex-1 bg-border mt-2" />
+                    </div>
+                    <div className="flex-1 pb-4">
+                      <p className="text-sm font-medium">Movement screening completed</p>
+                      <p className="text-xs text-muted-foreground mt-1">
+                        {athleteScreenings[0].drill.replace(/_/g, " ")} • {new Date(athleteScreenings[0].createdAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
+                      </p>
+                    </div>
+                  </div>
+                )}
+                
+                {athletePPE.length > 0 && (
+                  <div className="flex gap-4">
+                    <div className="flex flex-col items-center">
+                      <div className="flex size-2 rounded-full bg-primary" />
+                      <div className="w-px flex-1 bg-border mt-2" />
+                    </div>
+                    <div className="flex-1 pb-4">
+                      <p className="text-sm font-medium">PPE assessment completed</p>
+                      <p className="text-xs text-muted-foreground mt-1">
+                        {new Date(athletePPE[0].assessmentDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })} • {athletePPE[0].clinicianName}
+                      </p>
+                    </div>
+                  </div>
+                )}
+                
+                {athleteIncidents.length > 0 && (
+                  <div className="flex gap-4">
+                    <div className="flex flex-col items-center">
+                      <div className="flex size-2 rounded-full bg-amber-500" />
+                      <div className="w-px flex-1 bg-border mt-2" />
+                    </div>
+                    <div className="flex-1 pb-4">
+                      <p className="text-sm font-medium">Incident reported</p>
+                      <p className="text-xs text-muted-foreground mt-1">
+                        {athleteIncidents[0].type.replace(/_/g, " ")} • {new Date(athleteIncidents[0].incidentDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
+                      </p>
+                    </div>
+                  </div>
+                )}
+
+                <div className="flex gap-4">
+                  <div className="flex flex-col items-center">
+                    <div className="flex size-2 rounded-full bg-primary" />
+                  </div>
+                  <div className="flex-1">
+                    <p className="text-sm font-medium">SafeSport profile created</p>
+                    <p className="text-xs text-muted-foreground mt-1">
+                      Joined {athlete.currentOrganization?.name}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </Card>
+        </div>
+      </SidebarInset>
+    </SidebarProvider>
+  )
+}
