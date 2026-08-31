@@ -32,16 +32,22 @@ export function NotificationFiltersComponent({
       <TabsList>
         <TabsTrigger value="all">
           All
-          {stats.total > 0 && (
-            <span className="ml-2 text-xs text-muted-foreground" suppressHydrationWarning>
-              {stats.total}
+          {stats?.total > 0 && (
+            <span
+              className="ml-2 text-xs text-muted-foreground"
+              suppressHydrationWarning
+            >
+              {stats?.total}
             </span>
           )}
         </TabsTrigger>
         <TabsTrigger value="unread">
           Unread
           {stats.unread > 0 && (
-            <span className="ml-2 text-xs text-primary font-semibold" suppressHydrationWarning>
+            <span
+              className="ml-2 text-xs text-primary font-semibold"
+              suppressHydrationWarning
+            >
               {stats.unread}
             </span>
           )}
@@ -49,7 +55,10 @@ export function NotificationFiltersComponent({
         <TabsTrigger value="important">
           Important
           {stats.important > 0 && (
-            <span className="ml-2 text-xs text-muted-foreground" suppressHydrationWarning>
+            <span
+              className="ml-2 text-xs text-muted-foreground"
+              suppressHydrationWarning
+            >
               {stats.important}
             </span>
           )}

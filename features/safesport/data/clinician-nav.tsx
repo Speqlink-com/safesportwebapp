@@ -50,29 +50,6 @@ export function useClinicianNavData() {
             url: "/safesport/clinician/assessments",
           },
           {
-            title: "Incidents",
-            url: "/safesport/clinician/incidents",
-          },
-          {
-            title: "Eligibility",
-            url: "/safesport/clinician/eligibility",
-          },
-          {
-            title: "Referrals",
-            url: "/safesport/clinician/referrals",
-          },
-          {
-            title: "Reassessments",
-            url: "/safesport/clinician/reassessments",
-          },
-        ],
-      },
-      {
-        title: "Movement & Performance",
-        url: "#",
-        icon: <TrendingUpIcon />,
-        items: [
-          {
             title: "Screenings",
             url: "/safesport/clinician/screenings",
           },
@@ -81,8 +58,20 @@ export function useClinicianNavData() {
             url: "/safesport/clinician/ai-reviews",
           },
           {
-            title: "Baselines",
-            url: "/safesport/clinician/baselines",
+            title: "Referrals",
+            url: "/safesport/clinician/referrals",
+          },
+          {
+            title: "Incidents",
+            url: "/safesport/clinician/incidents",
+          },
+          {
+            title: "Eligibility",
+            url: "/safesport/clinician/eligibility",
+          },
+          {
+            title: "Reassessments",
+            url: "/safesport/clinician/reassessments",
           },
         ],
       },
@@ -163,18 +152,6 @@ export const clinicianNavData = {
           title: "Assessments / PPE",
           url: "/safesport/clinician/assessments",
         },
-
-        {
-          title: "Referrals",
-          url: "/safesport/clinician/referrals",
-        },
-      ],
-    },
-    {
-      title: "Movement & Performance",
-      url: "#",
-      icon: <TrendingUpIcon />,
-      items: [
         {
           title: "Screenings",
           url: "/safesport/clinician/screenings",
@@ -182,6 +159,10 @@ export const clinicianNavData = {
         {
           title: "AI Reviews",
           url: "/safesport/clinician/ai-reviews",
+        },
+        {
+          title: "Referrals",
+          url: "/safesport/clinician/referrals",
         },
       ],
     },
