@@ -79,17 +79,19 @@ export default function ClinicianNotificationsPage() {
             <div className="flex items-center gap-6 text-sm">
               <div>
                 <span className="text-muted-foreground">All: </span>
-                <span className="font-semibold">{stats?.total}</span>
+                <span className="font-semibold" suppressHydrationWarning>
+                  {stats?.total}
+                </span>
               </div>
               <div>
                 <span className="text-muted-foreground">Unread: </span>
-                <span className="font-semibold text-primary">
+                <span className="font-semibold text-primary" suppressHydrationWarning>
                   {stats.unread}
                 </span>
               </div>
               <div>
                 <span className="text-muted-foreground">Important: </span>
-                <span className="font-semibold text-yellow-600">
+                <span className="font-semibold text-yellow-600" suppressHydrationWarning>
                   {stats.important}
                 </span>
               </div>
