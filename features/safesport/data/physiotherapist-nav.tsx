@@ -25,16 +25,12 @@ export const physiotherapistNavData = {
       isActive: true,
       items: [
         {
+          title: "Overview",
+          url: "/safesport/physiotherapist",
+        },
+        {
           title: "Assigned Athletes",
-          url: "/dashboard/safesport/physiotherapist/athletes",
-        },
-        {
-          title: "Today's Sessions",
-          url: "/dashboard/safesport/physiotherapist/sessions",
-        },
-        {
-          title: "Tasks",
-          url: "/dashboard/safesport/physiotherapist/tasks",
+          url: "/safesport/physiotherapist/athletes",
         },
       ],
     },
@@ -45,15 +41,11 @@ export const physiotherapistNavData = {
       items: [
         {
           title: "Screenings",
-          url: "/dashboard/safesport/physiotherapist/screenings",
+          url: "/safesport/physiotherapist/screenings",
         },
         {
           title: "AI Reviews",
-          url: "/dashboard/safesport/physiotherapist/ai-reviews",
-        },
-        {
-          title: "Functional Baselines",
-          url: "/dashboard/safesport/physiotherapist/baselines",
+          url: "/safesport/physiotherapist/ai-reviews",
         },
       ],
     },
@@ -64,63 +56,49 @@ export const physiotherapistNavData = {
       items: [
         {
           title: "Active Rehab",
-          url: "/dashboard/safesport/physiotherapist/rehabilitation",
+          url: "/safesport/physiotherapist/rehabilitation",
         },
         {
           title: "Rehab Plans",
-          url: "/dashboard/safesport/physiotherapist/plans",
+          url: "/safesport/physiotherapist/plans",
         },
         {
           title: "Progress Reviews",
-          url: "/dashboard/safesport/physiotherapist/progress",
+          url: "/safesport/physiotherapist/progress",
         },
         {
           title: "Reassessments",
-          url: "/dashboard/safesport/physiotherapist/reassessments",
+          url: "/safesport/physiotherapist/reassessments",
         },
       ],
     },
     {
       title: "Referrals",
-      url: "#",
+      url: "/safesport/physiotherapist/referrals",
       icon: <ArrowRightLeftIcon />,
-      items: [
-        {
-          title: "Incoming Referrals",
-          url: "/dashboard/safesport/physiotherapist/referrals/incoming",
-        },
-        {
-          title: "My Referrals",
-          url: "/dashboard/safesport/physiotherapist/referrals/mine",
-        },
-        {
-          title: "Completed",
-          url: "/dashboard/safesport/physiotherapist/referrals/completed",
-        },
-      ],
     },
   ],
   communications: [
     {
       name: "Messages",
-      url: "/safesport/messages",
+      url: "/safesport/physiotherapist/messages",
       icon: <MessageSquareIcon />,
     },
     {
       name: "Notifications",
-      url: "/safesport/notifications",
+      url: "/safesport/physiotherapist/notifications",
       icon: <BellIcon />,
     },
   ],
   records: [
     {
       name: "Athlete Profiles",
-      url: "/dashboard/safesport/physiotherapist/profiles",
+      url: "/safesport/physiotherapist/profiles",
       icon: <UsersIcon />,
     },
     {
       name: "Reports",
-      url: "/dashboard/safesport/physiotherapist/reports",
+      url: "/safesport/physiotherapist/reports",
       icon: <FileTextIcon />,
     },
   ],
