@@ -1,12 +1,6 @@
 "use client";
 
 import { useState, useMemo } from "react";
-import {
-  SidebarInset,
-  SidebarProvider,
-} from "@/components/ui/sidebar";
-import { SafeSportSidebar } from "@/components/safesport-sidebar";
-import { clinicianNavData } from "@/features/safesport/data/clinician-nav";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import {
@@ -215,33 +209,31 @@ export default function AssessmentsPage() {
   }, [filteredAssessments]);
 
   return (
-    <SidebarProvider>
-      <SafeSportSidebar navData={clinicianNavData} />
-      <SidebarInset>
-        {/* Header */}
-        <header className="flex h-16 shrink-0 items-center justify-between border-b px-6">
-          <div>
-            <h1 className="text-2xl font-bold">PPE Assessments</h1>
-            <p className="text-sm text-muted-foreground">
-              Manage pre-participation health and performance assessments
-            </p>
-          </div>
-          <div className="flex items-center gap-2">
-            <Button variant="outline" size="sm">
-              <Download className="mr-2 h-4 w-4" />
-              Export
-            </Button>
-            <Button size="sm" className="rounded-none">
-              <FileText className="mr-2 h-4 w-4" />
-              New Assessment
-            </Button>
-          </div>
-        </header>
+    <div>
+      {/* Header */}
+      <div className="flex items-center justify-between border-b px-6 py-4">
+        <div>
+          <h1 className="text-2xl font-bold">PPE Assessments</h1>
+          <p className="text-sm text-muted-foreground">
+            Manage pre-participation health and performance assessments
+          </p>
+        </div>
+        <div className="flex items-center gap-2">
+          <Button variant="outline" size="sm">
+            <Download className="mr-2 h-4 w-4" />
+            Export
+          </Button>
+          <Button size="sm" className="rounded-none">
+            <FileText className="mr-2 h-4 w-4" />
+            New Assessment
+          </Button>
+        </div>
+      </div>
 
-        {/* Content */}
-        <div className="flex-1 space-y-6 p-6">
-          {/* Stats Cards */}
-          <div className="grid grid-cols-6 gap-4">
+      {/* Content */}
+      <div className="flex-1 space-y-6 p-6">
+        {/* Stats Cards */}
+        <div className="grid grid-cols-6 gap-4">
             <Card className="p-4">
               <div className="space-y-1">
                 <p className="text-sm text-muted-foreground">Total PPE</p>
@@ -520,7 +512,6 @@ export default function AssessmentsPage() {
             </div>
           </Card>
         </div>
-      </SidebarInset>
-    </SidebarProvider>
+      </div>
   );
 }

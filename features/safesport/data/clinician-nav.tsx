@@ -109,12 +109,12 @@ export function useClinicianNavData() {
     communications: [
       {
         name: "Messages",
-        url: "/safesport/messages",
+        url: "/safesport/clinician/messages",
         icon: <MessageSquareIcon />,
       },
       {
         name: "Notifications",
-        url: "/safesport/notifications",
+        url: "/safesport/clinician/notifications",
         icon: <BellIcon />,
         badge:
           notificationStats.unread > 0 ? (
@@ -189,12 +189,12 @@ export const clinicianNavData = {
   communications: [
     {
       name: "Messages",
-      url: "/safesport/messages",
+      url: "/safesport/clinician/messages",
       icon: <MessageSquareIcon />,
     },
     {
       name: "Notifications",
-      url: "/safesport/notifications",
+      url: "/safesport/clinician/notifications",
       icon: <BellIcon />,
     },
   ],

@@ -1,18 +1,5 @@
 "use client";
 
-import { SafeSportSidebar } from "@/components/safesport-sidebar";
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbList,
-  BreadcrumbPage,
-} from "@/components/ui/breadcrumb";
-import { Separator } from "@/components/ui/separator";
-import {
-  SidebarInset,
-  SidebarProvider,
-  SidebarTrigger,
-} from "@/components/ui/sidebar";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
@@ -23,7 +10,6 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart";
-import ThemeSwitcher from "@/components/theme_switcher";
 import {
   getClinicianDashboardStats,
   mockPPEAssessments,
@@ -34,7 +20,6 @@ import {
   getAthleteById,
   mockAthletes,
 } from "@/features/safesport/data/mock-data";
-import { clinicianNavData } from "@/features/safesport/data/clinician-nav";
 import {
   ClipboardListIcon,
   AlertCircleIcon,
@@ -138,33 +123,15 @@ export default function ClinicianDashboardPage() {
   } satisfies ChartConfig;
 
   return (
-    <SidebarProvider>
-      <SafeSportSidebar navData={clinicianNavData} />
-      <SidebarInset>
-        <header className="flex h-16 shrink-0 items-center justify-between gap-2 border-b px-4">
-          <div className="flex items-center gap-2">
-            <SidebarTrigger className="-ml-1" />
-            <Separator orientation="vertical" className="mr-2 h-4" />
-            <Breadcrumb>
-              <BreadcrumbList>
-                <BreadcrumbItem>
-                  <BreadcrumbPage>Clinician Dashboard</BreadcrumbPage>
-                </BreadcrumbItem>
-              </BreadcrumbList>
-            </Breadcrumb>
-          </div>
-          <ThemeSwitcher />
-        </header>
+    <div className="flex flex-1 flex-col gap-6 p-6 max-w-[1600px] mx-auto w-full">
+      {/* Header */}
+      <div>
+        <h1 className="text-3xl font-semibold tracking-tight">Good morning, Dr. Ndungu</h1>
+        <p className="text-sm text-muted-foreground mt-1">{today}</p>
+      </div>
 
-        <div className="flex flex-1 flex-col gap-6 p-6">
-          {/* Header */}
-          <div>
-            <h1 className="text-2xl font-semibold">Good morning, Dr. Ndungu</h1>
-            <p className="text-sm text-muted-foreground">{today}</p>
-          </div>
-
-          {/* KPI Strip */}
-          <div className="grid grid-cols-5 gap-4">
+      {/* KPI Strip */}
+      <div className="grid grid-cols-5 gap-4">
             <Card className="p-6">
               <div className="flex flex-col items-center justify-center gap-2">
                 <div className="flex items-center gap-2">
@@ -500,8 +467,6 @@ export default function ClinicianDashboardPage() {
               </Button>
             </div>
           </Card>
-        </div>
-      </SidebarInset>
-    </SidebarProvider>
+    </div>
   );
 }

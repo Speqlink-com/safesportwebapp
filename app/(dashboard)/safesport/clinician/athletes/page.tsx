@@ -1,9 +1,6 @@
 "use client";
 
 import { useState, useMemo } from "react";
-import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
-import { SafeSportSidebar } from "@/components/safesport-sidebar";
-import { clinicianNavData } from "@/features/safesport/data/clinician-nav";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import {
@@ -29,7 +26,7 @@ import {
   mockAthletes,
   mockPPEAssessments,
 } from "@/features/safesport/data/mock-data";
-import type { Athlete, PPEAssessment } from "@/features/safesport/types";
+import type { PPEAssessment } from "@/features/safesport/types";
 
 // Helper to get PPE status for athlete
 function getAthletePPEStatus(athleteId: string): PPEAssessment | undefined {
@@ -104,8 +101,6 @@ export default function AthletesPage() {
   const [teamFilter, setTeamFilter] = useState("all");
   const [sportFilter, setSportFilter] = useState("all");
   const [ppeStatusFilter, setPpeStatusFilter] = useState("all");
-  const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 8;
 
   // Get unique teams and sports for filters
   const teams = useMemo(() => {
@@ -163,17 +158,6 @@ export default function AthletesPage() {
     });
   }, [search, eligibilityFilter, teamFilter, sportFilter, ppeStatusFilter]);
 
-  // Reset to page 1 when filters change
-  useMemo(() => {
-    setCurrentPage(1);
-  }, [search, eligibilityFilter, teamFilter, sportFilter, ppeStatusFilter]);
-
-  // Pagination
-  const totalPages = Math.ceil(filteredAthletes.length / itemsPerPage);
-  const startIndex = (currentPage - 1) * itemsPerPage;
-  const endIndex = startIndex + itemsPerPage;
-  const paginatedAthletes = filteredAthletes.slice(startIndex, endIndex);
-
   // Calculate stats
   const stats = useMemo(() => {
     const total = filteredAthletes.length;
@@ -220,32 +204,30 @@ export default function AthletesPage() {
   }, [filteredAthletes]);
 
   return (
-    <SidebarProvider>
-      <SafeSportSidebar navData={clinicianNavData} />
-      <SidebarInset>
-        {/* Header */}
-        <header className="flex h-16 shrink-0 items-center justify-between border-b px-6">
-          <div>
-            <h1 className="text-2xl font-bold">Athletes</h1>
-            <p className="text-sm text-muted-foreground">
-              Manage athlete profiles, eligibility, and PPE assessments
-            </p>
-          </div>
-          <div className="flex items-center gap-2">
-            <Button variant="outline" size="sm">
-              <Download className="mr-2 h-4 w-4" />
-              Export
-            </Button>
-            <Button size="sm" className="rounded-none hidden">
-              <UserPlus className="mr-2 h-4 w-4" />
-              Add Athlete
-            </Button>
-          </div>
-        </header>
+    <div>
+      {/* Header */}
+      <div className="flex items-center justify-between border-b px-6 py-4">
+        <div>
+          <h1 className="text-2xl font-bold">Athletes</h1>
+          <p className="text-sm text-muted-foreground">
+            Manage athlete profiles, eligibility, and PPE assessments
+          </p>
+        </div>
+        <div className="flex items-center gap-2">
+          <Button variant="outline" size="sm">
+            <Download className="mr-2 h-4 w-4" />
+            Export
+          </Button>
+          <Button size="sm" className="rounded-none">
+            <UserPlus className="mr-2 h-4 w-4" />
+            Add Athlete
+          </Button>
+        </div>
+      </div>
 
-        {/* Content */}
-        <div className="flex-1 space-y-6 p-6">
-          {/* Stats Cards */}
+      {/* Content */}
+      <div className="flex-1 space-y-6 p-6">
+        {/* Stats Cards */}
           <div className="grid grid-cols-5 gap-4">
             <Card className="p-4">
               <div className="space-y-1">
@@ -523,7 +505,6 @@ export default function AthletesPage() {
             </div>
           </Card>
         </div>
-      </SidebarInset>
-    </SidebarProvider>
+      </div>
   );
 }
