@@ -270,7 +270,7 @@ export default function ReferralDetailPage({ params }: PageProps) {
                     </label>
                     <Select
                       value={status}
-                      onValueChange={(value) => setStatus(value)}
+                      onValueChange={(value) => setStatus(value || "pending")}
                     >
                       <SelectTrigger>
                         <SelectValue />

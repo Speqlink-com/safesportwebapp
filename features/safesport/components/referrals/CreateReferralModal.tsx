@@ -96,7 +96,7 @@ export function CreateReferralModal({
 
     // Reset form
     resetForm();
-    onOpenChange(false);
+    onOpenChange?.(false);
   };
 
   const resetForm = () => {
@@ -126,11 +126,9 @@ export function CreateReferralModal({
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       {showTrigger && (
-        <DialogTrigger asChild>
-          <Button>
-            <Plus className="mr-2 h-4 w-4" />
-            Create Referral
-          </Button>
+        <DialogTrigger>
+          <Plus className="mr-2 h-4 w-4" />
+          Create Referral
         </DialogTrigger>
       )}
       <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
@@ -150,7 +148,7 @@ export function CreateReferralModal({
               </Label>
               <Select
                 value={athleteId}
-                onValueChange={setAthleteId}
+                onValueChange={(value) => setAthleteId(value || "")}
                 disabled={!!defaultAthleteId}
               >
                 <SelectTrigger id="athlete">
@@ -171,7 +169,7 @@ export function CreateReferralModal({
               <Label htmlFor="source">Related To</Label>
               <Select
                 value={source}
-                onValueChange={(value: any) => setSource(value)}
+                onValueChange={(value) => setSource(value || "standalone")}
                 disabled={!!defaultSource}
               >
                 <SelectTrigger id="source">
@@ -190,7 +188,7 @@ export function CreateReferralModal({
             {source === "ppe" && (
               <div className="space-y-2">
                 <Label htmlFor="sourceId">PPE Assessment</Label>
-                <Select value={sourceId} onValueChange={setSourceId}>
+                <Select value={sourceId} onValueChange={(value) => setSourceId(value || "")}>
                   <SelectTrigger id="sourceId">
                     <SelectValue placeholder="Select PPE assessment" />
                   </SelectTrigger>
@@ -214,7 +212,7 @@ export function CreateReferralModal({
             {source === "screening" && (
               <div className="space-y-2">
                 <Label htmlFor="sourceId">Movement Screening</Label>
-                <Select value={sourceId} onValueChange={setSourceId}>
+                <Select value={sourceId} onValueChange={(value) => setSourceId(value || "")}>
                   <SelectTrigger id="sourceId">
                     <SelectValue placeholder="Select screening" />
                   </SelectTrigger>
@@ -238,7 +236,7 @@ export function CreateReferralModal({
             {source === "incident" && (
               <div className="space-y-2">
                 <Label htmlFor="sourceId">Incident</Label>
-                <Select value={sourceId} onValueChange={setSourceId}>
+                <Select value={sourceId} onValueChange={(value) => setSourceId(value || "")}>
                   <SelectTrigger id="sourceId">
                     <SelectValue placeholder="Select incident" />
                   </SelectTrigger>
@@ -250,7 +248,7 @@ export function CreateReferralModal({
                     ) : (
                       availableIncidents.map((incident) => (
                         <SelectItem key={incident.id} value={incident.id}>
-                          {incident.id} - {incident.type} ({new Date(incident.timestamp).toLocaleDateString()})
+                          {incident.id} - {incident.type} ({new Date(incident.incidentDate).toLocaleDateString()})
                         </SelectItem>
                       ))
                     )}
@@ -264,7 +262,7 @@ export function CreateReferralModal({
               <Label htmlFor="type">
                 Destination (Specialist Type) <span className="text-red-500">*</span>
               </Label>
-              <Select value={type} onValueChange={(value: any) => setType(value)}>
+              <Select value={type} onValueChange={(value) => setType(value || "")}>
                 <SelectTrigger id="type">
                   <SelectValue placeholder="Select specialist type" />
                 </SelectTrigger>
@@ -290,7 +288,7 @@ export function CreateReferralModal({
               </Label>
               <Select
                 value={urgency}
-                onValueChange={(value: any) => setUrgency(value)}
+                onValueChange={(value) => setUrgency(value || "")}
               >
                 <SelectTrigger id="urgency">
                   <SelectValue placeholder="Select urgency level" />
@@ -348,7 +346,7 @@ export function CreateReferralModal({
               variant="outline"
               onClick={() => {
                 resetForm();
-                onOpenChange(false);
+                onOpenChange?.(false);
               }}
             >
               Cancel

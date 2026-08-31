@@ -1,8 +1,13 @@
 // SafeSport™ Messaging Mock Data
 // Realistic institution-based family communication data
 
-import type { Family, FamilyMember, Conversation, Message } from "../types/messaging"
-import type { UserID } from "../types"
+import type {
+  Family,
+  FamilyMember,
+  Conversation,
+  Message,
+} from "../types/messaging";
+import type { UserID } from "../types";
 
 // ==================================================
 // FAMILIES (Institution-based communication groups)
@@ -33,7 +38,7 @@ export const mockFamilies: Family[] = [
     memberCount: 6,
     createdAt: "2022-01-10T08:00:00Z",
   },
-]
+];
 
 // ==================================================
 // FAMILY MEMBERS
@@ -112,7 +117,7 @@ export const mockFamilyMembers: FamilyMember[] = [
     role: "operations",
     status: "online",
   },
-]
+];
 
 // ==================================================
 // CONVERSATIONS
@@ -124,8 +129,16 @@ export const mockConversations: Conversation[] = [
     familyId: "family-001",
     type: "direct",
     participants: [
-      { userId: "user-003", joinedAt: "2026-08-28T09:00:00Z", lastReadAt: "2026-08-30T10:45:00Z" },
-      { userId: "user-004", joinedAt: "2026-08-28T09:00:00Z", lastReadAt: "2026-08-30T10:30:00Z" },
+      {
+        userId: "user-003",
+        joinedAt: "2026-08-28T09:00:00Z",
+        lastReadAt: "2026-08-30T10:45:00Z",
+      },
+      {
+        userId: "user-004",
+        joinedAt: "2026-08-28T09:00:00Z",
+        lastReadAt: "2026-08-30T10:30:00Z",
+      },
     ],
     lastMessage: {
       id: "msg-004",
@@ -133,7 +146,8 @@ export const mockConversations: Conversation[] = [
       senderId: "user-004",
       senderName: "Dr. Sarah Njeri",
       senderRole: "Clinician",
-      content: "Appreciated. Let me know if you notice anything unusual during the match.",
+      content:
+        "Appreciated. Let me know if you notice anything unusual during the match.",
       status: "read",
       createdAt: "2026-08-30T10:30:00Z",
     },
@@ -146,8 +160,16 @@ export const mockConversations: Conversation[] = [
     familyId: "family-001",
     type: "direct",
     participants: [
-      { userId: "user-004", joinedAt: "2026-08-27T10:00:00Z", lastReadAt: "2026-08-30T11:00:00Z" },
-      { userId: "user-005", joinedAt: "2026-08-27T10:00:00Z", lastReadAt: "2026-08-30T10:50:00Z" },
+      {
+        userId: "user-004",
+        joinedAt: "2026-08-27T10:00:00Z",
+        lastReadAt: "2026-08-30T11:00:00Z",
+      },
+      {
+        userId: "user-005",
+        joinedAt: "2026-08-27T10:00:00Z",
+        lastReadAt: "2026-08-30T10:50:00Z",
+      },
     ],
     lastMessage: {
       id: "msg-007",
@@ -155,7 +177,8 @@ export const mockConversations: Conversation[] = [
       senderId: "user-004",
       senderName: "Dr. Sarah Njeri",
       senderRole: "Clinician",
-      content: "Thursday at 2:00 PM works for me. I'll coordinate with Brian and his guardian.",
+      content:
+        "Thursday at 2:00 PM works for me. I'll coordinate with Brian and his guardian.",
       status: "read",
       createdAt: "2026-08-30T10:50:00Z",
     },
@@ -171,8 +194,16 @@ export const mockConversations: Conversation[] = [
     familyId: "family-001",
     type: "direct",
     participants: [
-      { userId: "user-001", joinedAt: "2026-08-29T14:00:00Z", lastReadAt: "2026-08-30T08:00:00Z" },
-      { userId: "user-003", joinedAt: "2026-08-29T14:00:00Z", lastReadAt: "2026-08-30T10:45:00Z" },
+      {
+        userId: "user-001",
+        joinedAt: "2026-08-29T14:00:00Z",
+        lastReadAt: "2026-08-30T08:00:00Z",
+      },
+      {
+        userId: "user-003",
+        joinedAt: "2026-08-29T14:00:00Z",
+        lastReadAt: "2026-08-30T10:45:00Z",
+      },
     ],
     lastMessage: {
       id: "msg-011",
@@ -193,8 +224,16 @@ export const mockConversations: Conversation[] = [
     familyId: "family-001",
     type: "direct",
     participants: [
-      { userId: "user-002", joinedAt: "2026-08-26T11:00:00Z", lastReadAt: "2026-08-29T16:00:00Z" },
-      { userId: "user-006", joinedAt: "2026-08-26T11:00:00Z", lastReadAt: "2026-08-30T09:00:00Z" },
+      {
+        userId: "user-002",
+        joinedAt: "2026-08-26T11:00:00Z",
+        lastReadAt: "2026-08-29T16:00:00Z",
+      },
+      {
+        userId: "user-006",
+        joinedAt: "2026-08-26T11:00:00Z",
+        lastReadAt: "2026-08-30T09:00:00Z",
+      },
     ],
     lastMessage: {
       id: "msg-013",
@@ -202,7 +241,8 @@ export const mockConversations: Conversation[] = [
       senderId: "user-006",
       senderName: "John Doe",
       senderRole: "Institution",
-      content: "Good afternoon Mrs. Otieno. Brian's medical clearance is up to date and he's registered for the tournament. All documentation has been submitted.",
+      content:
+        "Good afternoon Mrs. Otieno. Brian's medical clearance is up to date and he's registered for the tournament. All documentation has been submitted.",
       status: "read",
       createdAt: "2026-08-30T09:00:00Z",
     },
@@ -215,8 +255,16 @@ export const mockConversations: Conversation[] = [
     familyId: "family-001",
     type: "direct",
     participants: [
-      { userId: "user-001", joinedAt: "2026-08-29T08:00:00Z", lastReadAt: "2026-08-30T11:30:00Z" },
-      { userId: "user-004", joinedAt: "2026-08-29T08:00:00Z", lastReadAt: "2026-08-30T12:00:00Z" },
+      {
+        userId: "user-001",
+        joinedAt: "2026-08-29T08:00:00Z",
+        lastReadAt: "2026-08-30T11:30:00Z",
+      },
+      {
+        userId: "user-004",
+        joinedAt: "2026-08-29T08:00:00Z",
+        lastReadAt: "2026-08-30T12:00:00Z",
+      },
     ],
     lastMessage: {
       id: "msg-020",
@@ -224,7 +272,8 @@ export const mockConversations: Conversation[] = [
       senderId: "user-001",
       senderName: "Brian Otieno",
       senderRole: "Athlete",
-      content: "Thank you Dr. Njeri! I'll make sure to do the stretches before training.",
+      content:
+        "Thank you Dr. Njeri! I'll make sure to do the stretches before training.",
       status: "read",
       createdAt: "2026-08-30T11:30:00Z",
     },
@@ -240,14 +289,46 @@ export const mockConversations: Conversation[] = [
     familyId: "family-001",
     type: "group",
     participants: [
-      { userId: "user-001", joinedAt: "2024-01-10T08:00:00Z", lastReadAt: "2026-08-30T11:00:00Z" },
-      { userId: "user-002", joinedAt: "2024-01-10T08:00:00Z", lastReadAt: "2026-08-30T10:00:00Z" },
-      { userId: "user-003", joinedAt: "2024-01-10T08:00:00Z", lastReadAt: "2026-08-30T12:00:00Z" },
-      { userId: "user-004", joinedAt: "2024-01-10T08:00:00Z", lastReadAt: "2026-08-30T12:00:00Z" },
-      { userId: "user-005", joinedAt: "2024-01-10T08:00:00Z", lastReadAt: "2026-08-30T11:30:00Z" },
-      { userId: "user-006", joinedAt: "2024-01-10T08:00:00Z", lastReadAt: "2026-08-29T17:30:00Z" },
-      { userId: "user-007", joinedAt: "2024-01-10T08:00:00Z", lastReadAt: "2026-08-30T09:45:00Z" },
-      { userId: "user-008", joinedAt: "2024-01-10T08:00:00Z", lastReadAt: "2026-08-30T11:45:00Z" },
+      {
+        userId: "user-001",
+        joinedAt: "2024-01-10T08:00:00Z",
+        lastReadAt: "2026-08-30T11:00:00Z",
+      },
+      {
+        userId: "user-002",
+        joinedAt: "2024-01-10T08:00:00Z",
+        lastReadAt: "2026-08-30T10:00:00Z",
+      },
+      {
+        userId: "user-003",
+        joinedAt: "2024-01-10T08:00:00Z",
+        lastReadAt: "2026-08-30T12:00:00Z",
+      },
+      {
+        userId: "user-004",
+        joinedAt: "2024-01-10T08:00:00Z",
+        lastReadAt: "2026-08-30T12:00:00Z",
+      },
+      {
+        userId: "user-005",
+        joinedAt: "2024-01-10T08:00:00Z",
+        lastReadAt: "2026-08-30T11:30:00Z",
+      },
+      {
+        userId: "user-006",
+        joinedAt: "2024-01-10T08:00:00Z",
+        lastReadAt: "2026-08-29T17:30:00Z",
+      },
+      {
+        userId: "user-007",
+        joinedAt: "2024-01-10T08:00:00Z",
+        lastReadAt: "2026-08-30T09:45:00Z",
+      },
+      {
+        userId: "user-008",
+        joinedAt: "2024-01-10T08:00:00Z",
+        lastReadAt: "2026-08-30T11:45:00Z",
+      },
     ],
     lastMessage: {
       id: "msg-group-005",
@@ -255,7 +336,8 @@ export const mockConversations: Conversation[] = [
       senderId: "user-008",
       senderName: "Grace Mwangi",
       senderRole: "Operations",
-      content: "Reminder: Tournament registration closes this Friday. Please ensure all documentation is submitted.",
+      content:
+        "Reminder: Tournament registration closes this Friday. Please ensure all documentation is submitted.",
       status: "delivered",
       createdAt: "2026-08-30T11:45:00Z",
     },
@@ -263,7 +345,7 @@ export const mockConversations: Conversation[] = [
     createdAt: "2024-01-10T08:00:00Z",
     updatedAt: "2026-08-30T11:45:00Z",
   },
-]
+];
 
 // ==================================================
 // MESSAGES
@@ -277,7 +359,8 @@ export const mockMessages: Record<string, Message[]> = {
       senderId: "user-003",
       senderName: "Peter Kamau",
       senderRole: "Coach",
-      content: "Good morning Dr. Njeri. I wanted to check on Brian's status for tomorrow's match.",
+      content:
+        "Good evening Dr. Njeri. I wanted to check on Brian's status for tomorrow's match.",
       status: "read",
       createdAt: "2026-08-30T09:15:00Z",
     },
@@ -287,7 +370,8 @@ export const mockMessages: Record<string, Message[]> = {
       senderId: "user-004",
       senderName: "Dr. Sarah Njeri",
       senderRole: "Clinician",
-      content: "Morning Coach. Brian's screening results look good. He's cleared for participation with the usual monitoring protocols.",
+      content:
+        "Evening Coach. Brian's screening results look good. He's cleared for participation with the usual monitoring protocols.",
       status: "read",
       createdAt: "2026-08-30T09:22:00Z",
     },
@@ -297,7 +381,8 @@ export const mockMessages: Record<string, Message[]> = {
       senderId: "user-003",
       senderName: "Peter Kamau",
       senderRole: "Coach",
-      content: "Perfect, thank you! I'll make sure he follows the warm-up routine we discussed.",
+      content:
+        "Perfect, thank you! I'll make sure he follows the warm-up routine we discussed.",
       status: "read",
       createdAt: "2026-08-30T09:25:00Z",
     },
@@ -307,7 +392,8 @@ export const mockMessages: Record<string, Message[]> = {
       senderId: "user-004",
       senderName: "Dr. Sarah Njeri",
       senderRole: "Clinician",
-      content: "Appreciated. Let me know if you notice anything unusual during the match.",
+      content:
+        "Appreciated. Let me know if you notice anything unusual during the match.",
       status: "read",
       createdAt: "2026-08-30T10:30:00Z",
     },
@@ -319,7 +405,8 @@ export const mockMessages: Record<string, Message[]> = {
       senderId: "user-004",
       senderName: "Dr. Sarah Njeri",
       senderRole: "Clinician",
-      content: "Hi Mary, I've completed the initial assessment for Brian's knee. The referral is ready for your review.",
+      content:
+        "Hi Mary, I've completed the initial assessment for Brian's knee. The referral is ready for your review.",
       attachments: [
         {
           id: "att-001",
@@ -342,7 +429,8 @@ export const mockMessages: Record<string, Message[]> = {
       senderId: "user-005",
       senderName: "Mary Wanjiku",
       senderRole: "Physiotherapist",
-      content: "Thank you Dr. Njeri. I've reviewed the assessment. Can we schedule a session for Thursday afternoon?",
+      content:
+        "Thank you Dr. Njeri. I've reviewed the assessment. Can we schedule a session for Thursday afternoon?",
       status: "read",
       createdAt: "2026-08-30T10:35:00Z",
     },
@@ -352,7 +440,8 @@ export const mockMessages: Record<string, Message[]> = {
       senderId: "user-004",
       senderName: "Dr. Sarah Njeri",
       senderRole: "Clinician",
-      content: "Thursday at 2:00 PM works for me. I'll coordinate with Brian and his guardian.",
+      content:
+        "Thursday at 2:00 PM works for me. I'll coordinate with Brian and his guardian.",
       status: "read",
       createdAt: "2026-08-30T10:50:00Z",
     },
@@ -364,7 +453,8 @@ export const mockMessages: Record<string, Message[]> = {
       senderId: "user-001",
       senderName: "Brian Otieno",
       senderRole: "Athlete",
-      content: "Hi Coach! Just confirming - practice is at 3:00 PM today, right?",
+      content:
+        "Hi Coach! Just confirming - practice is at 3:00 PM today, right?",
       status: "read",
       createdAt: "2026-08-30T08:00:00Z",
     },
@@ -374,7 +464,8 @@ export const mockMessages: Record<string, Message[]> = {
       senderId: "user-003",
       senderName: "Peter Kamau",
       senderRole: "Coach",
-      content: "Hi Brian! Yes, 3:00 PM sharp. Don't forget your water bottle and shin guards.",
+      content:
+        "Hi Brian! Yes, 3:00 PM sharp. Don't forget your water bottle and shin guards.",
       status: "read",
       createdAt: "2026-08-30T08:15:00Z",
     },
@@ -384,7 +475,8 @@ export const mockMessages: Record<string, Message[]> = {
       senderId: "user-003",
       senderName: "Peter Kamau",
       senderRole: "Coach",
-      content: "Also, we're focusing on set pieces today. Make sure you've reviewed last week's video.",
+      content:
+        "Also, we're focusing on set pieces today. Make sure you've reviewed last week's video.",
       status: "delivered",
       createdAt: "2026-08-30T10:45:00Z",
     },
@@ -406,7 +498,8 @@ export const mockMessages: Record<string, Message[]> = {
       senderId: "user-002",
       senderName: "Jane Otieno",
       senderRole: "Guardian",
-      content: "Good afternoon. I wanted to confirm Brian's participation status for the upcoming tournament.",
+      content:
+        "Good afternoon. I wanted to confirm Brian's participation status for the upcoming tournament.",
       status: "read",
       createdAt: "2026-08-29T16:00:00Z",
     },
@@ -416,7 +509,8 @@ export const mockMessages: Record<string, Message[]> = {
       senderId: "user-006",
       senderName: "John Doe",
       senderRole: "Institution",
-      content: "Good afternoon Mrs. Otieno. Brian's medical clearance is up to date and he's registered for the tournament. All documentation has been submitted.",
+      content:
+        "Good afternoon Mrs. Otieno. Brian's medical clearance is up to date and he's registered for the tournament. All documentation has been submitted.",
       status: "read",
       createdAt: "2026-08-30T09:00:00Z",
     },
@@ -428,7 +522,8 @@ export const mockMessages: Record<string, Message[]> = {
       senderId: "user-004",
       senderName: "Dr. Sarah Njeri",
       senderRole: "Clinician",
-      content: "Hi Brian, I've reviewed your latest health screening results. Everything looks good!",
+      content:
+        "Hi Brian, I've reviewed your latest health screening results. Everything looks good!",
       status: "read",
       createdAt: "2026-08-29T08:15:00Z",
     },
@@ -473,7 +568,8 @@ export const mockMessages: Record<string, Message[]> = {
       senderName: "Brian Otieno",
       senderRole: "Athlete",
       senderAvatar: "/avatars/brian.jpg",
-      content: "Will do! Coach Peter has been helping me with them during practice.",
+      content:
+        "Will do! Coach Peter has been helping me with them during practice.",
       status: "read",
       createdAt: "2026-08-30T10:15:00Z",
     },
@@ -483,7 +579,8 @@ export const mockMessages: Record<string, Message[]> = {
       senderId: "user-004",
       senderName: "Dr. Sarah Njeri",
       senderRole: "Clinician",
-      content: "Perfect! Let me know if you experience any discomfort during training.",
+      content:
+        "Perfect! Let me know if you experience any discomfort during training.",
       status: "read",
       createdAt: "2026-08-30T11:00:00Z",
     },
@@ -494,7 +591,8 @@ export const mockMessages: Record<string, Message[]> = {
       senderName: "Brian Otieno",
       senderRole: "Athlete",
       senderAvatar: "/avatars/brian.jpg",
-      content: "Thank you Dr. Njeri! I'll make sure to do the stretches before training.",
+      content:
+        "Thank you Dr. Njeri! I'll make sure to do the stretches before training.",
       status: "read",
       createdAt: "2026-08-30T11:30:00Z",
     },
@@ -530,7 +628,8 @@ export const mockMessages: Record<string, Message[]> = {
       senderId: "user-006",
       senderName: "John Doe",
       senderRole: "Institution",
-      content: "Good morning everyone! Just a reminder that our SafeSport training session is scheduled for next Monday at 3 PM.",
+      content:
+        "Good evening everyone! Just a reminder that our SafeSport training session is scheduled for next Monday at 3 PM.",
       status: "read",
       createdAt: "2026-08-28T08:00:00Z",
     },
@@ -540,7 +639,8 @@ export const mockMessages: Record<string, Message[]> = {
       senderId: "user-003",
       senderName: "Peter Kamau",
       senderRole: "Coach",
-      content: "Thanks for the reminder! I'll adjust training schedule to ensure all athletes can attend.",
+      content:
+        "Thanks for the reminder! I'll adjust training schedule to ensure all athletes can attend.",
       status: "read",
       createdAt: "2026-08-28T08:30:00Z",
     },
@@ -550,7 +650,8 @@ export const mockMessages: Record<string, Message[]> = {
       senderId: "user-004",
       senderName: "Dr. Sarah Njeri",
       senderRole: "Clinician",
-      content: "I've completed health screenings for Brian and David. Both are cleared for full participation.",
+      content:
+        "I've completed health screenings for Brian and David. Both are cleared for full participation.",
       status: "read",
       createdAt: "2026-08-29T10:00:00Z",
     },
@@ -570,49 +671,59 @@ export const mockMessages: Record<string, Message[]> = {
       senderId: "user-008",
       senderName: "Grace Mwangi",
       senderRole: "Operations",
-      content: "Reminder: Tournament registration closes this Friday. Please ensure all documentation is submitted.",
+      content:
+        "Reminder: Tournament registration closes this Friday. Please ensure all documentation is submitted.",
       status: "delivered",
       createdAt: "2026-08-30T11:45:00Z",
     },
   ],
-}
+};
 
 // ==================================================
 // HELPER FUNCTIONS
 // ==================================================
 
-export function getConversationParticipants(conversationId: string): FamilyMember[] {
-  const conversation = mockConversations.find((c) => c.id === conversationId)
-  if (!conversation) return []
-  
+export function getConversationParticipants(
+  conversationId: string,
+): FamilyMember[] {
+  const conversation = mockConversations.find((c) => c.id === conversationId);
+  if (!conversation) return [];
+
   return conversation.participants
     .map((p) => mockFamilyMembers.find((m) => m.id === p.userId))
-    .filter((m): m is FamilyMember => m !== undefined)
+    .filter((m): m is FamilyMember => m !== undefined);
 }
 
 export function getConversationMessages(conversationId: string): Message[] {
-  return mockMessages[conversationId] || []
+  return mockMessages[conversationId] || [];
 }
 
-export function getUserConversations(userId: UserID, familyId?: string): Conversation[] {
+export function getUserConversations(
+  userId: UserID,
+  familyId?: string,
+): Conversation[] {
   return mockConversations.filter((conv) => {
-    const isParticipant = conv.participants.some((p) => p.userId === userId)
-    const inFamily = familyId ? conv.familyId === familyId : true
-    return isParticipant && inFamily
-  })
+    const isParticipant = conv.participants.some((p) => p.userId === userId);
+    const inFamily = familyId ? conv.familyId === familyId : true;
+    return isParticipant && inFamily;
+  });
 }
 
 export function getFamilyMembers(familyId: string): FamilyMember[] {
-  return mockFamilyMembers.filter((m) => m.familyId === familyId)
+  return mockFamilyMembers.filter((m) => m.familyId === familyId);
 }
 
-export function searchFamilyMembers(familyId: string, query: string): FamilyMember[] {
-  const members = getFamilyMembers(familyId)
-  const lowerQuery = query.toLowerCase()
-  
-  return members.filter((m) => 
-    `${m.firstName} ${m.lastName}`.toLowerCase().includes(lowerQuery) ||
-    m.role.toLowerCase().includes(lowerQuery) ||
-    m.team?.toLowerCase().includes(lowerQuery)
-  )
+export function searchFamilyMembers(
+  familyId: string,
+  query: string,
+): FamilyMember[] {
+  const members = getFamilyMembers(familyId);
+  const lowerQuery = query.toLowerCase();
+
+  return members.filter(
+    (m) =>
+      `${m.firstName} ${m.lastName}`.toLowerCase().includes(lowerQuery) ||
+      m.role.toLowerCase().includes(lowerQuery) ||
+      m.team?.toLowerCase().includes(lowerQuery),
+  );
 }
