@@ -179,16 +179,4 @@ export const clinicianNavData = {
       icon: <BellIcon />,
     },
   ],
-  records: [
-    {
-      name: "Reports",
-      url: "/safesport/clinician/reports",
-      icon: <FileTextIcon />,
-    },
-    {
-      name: "Certificates",
-      url: "/safesport/clinician/certificates",
-      icon: <AwardIcon />,
-    },
-  ],
 };

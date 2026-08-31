@@ -34,11 +34,12 @@ import type {
 } from "@/features/safesport/types";
 
 interface CreateReferralModalProps {
-  open: boolean;
-  onOpenChange: (open: boolean) => void;
+  open?: boolean;
+  onOpenChange?: (open: boolean) => void;
   defaultAthleteId?: string;
   defaultSource?: "ppe" | "screening" | "incident";
   defaultSourceId?: string;
+  showTrigger?: boolean;
 }
 
 export function CreateReferralModal({
@@ -47,6 +48,7 @@ export function CreateReferralModal({
   defaultAthleteId,
   defaultSource,
   defaultSourceId,
+  showTrigger = true,
 }: CreateReferralModalProps) {
   const [athleteId, setAthleteId] = useState(defaultAthleteId || "");
   const [type, setType] = useState<ReferralType | "">("");
@@ -123,12 +125,14 @@ export function CreateReferralModal({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogTrigger asChild>
-        <Button>
-          <Plus className="mr-2 h-4 w-4" />
-          Create Referral
-        </Button>
-      </DialogTrigger>
+      {showTrigger && (
+        <DialogTrigger asChild>
+          <Button>
+            <Plus className="mr-2 h-4 w-4" />
+            Create Referral
+          </Button>
+        </DialogTrigger>
+      )}
       <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle>Create New Referral</DialogTitle>

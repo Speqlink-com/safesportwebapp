@@ -213,26 +213,33 @@ export default function ReferralsPage() {
   }, [search, statusFilter, urgencyFilter, typeFilter]);
 
   return (
-    <div className="space-y-6">
-      {/* Header */}
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-3xl font-bold tracking-tight">Referrals</h1>
-          <p className="text-muted-foreground">
-            Manage athlete referrals to specialists
-          </p>
+    <div className="flex flex-1 flex-col p-6">
+      <div className="space-y-6 max-w-[1600px] mx-auto w-full">
+        {/* Header */}
+        <div className="flex items-center justify-between">
+          <div>
+            <h1 className="text-3xl font-bold tracking-tight">Referrals</h1>
+            <p className="text-muted-foreground">
+              Manage athlete referrals to specialists
+            </p>
+          </div>
+          <div className="flex items-center gap-2">
+            <Button variant="outline" size="sm">
+              <Download className="mr-2 h-4 w-4" />
+              Export
+            </Button>
+            <Button onClick={() => setCreateModalOpen(true)}>
+              <Plus className="mr-2 h-4 w-4" />
+              Create Referral
+            </Button>
+          </div>
         </div>
-        <div className="flex items-center gap-2">
-          <Button variant="outline" size="sm">
-            <Download className="mr-2 h-4 w-4" />
-            Export
-          </Button>
-          <CreateReferralModal
-            open={createModalOpen}
-            onOpenChange={setCreateModalOpen}
-          />
-        </div>
-      </div>
+
+        <CreateReferralModal
+          open={createModalOpen}
+          onOpenChange={setCreateModalOpen}
+          showTrigger={false}
+        />
 
       {/* Status Pipeline Cards */}
       <div className="grid gap-4 md:grid-cols-6">
@@ -494,6 +501,7 @@ export default function ReferralsPage() {
             </span>
           )}
         </p>
+      </div>
       </div>
     </div>
   );
