@@ -47,6 +47,10 @@ export const physiotherapistNavData = {
           title: "AI Reviews",
           url: "/safesport/physiotherapist/ai-reviews",
         },
+        {
+          title: "Functional Baselines",
+          url: "/safesport/physiotherapist/baselines",
+        },
       ],
     },
     {
@@ -74,32 +78,34 @@ export const physiotherapistNavData = {
     },
     {
       title: "Referrals",
-      url: "/safesport/physiotherapist/referrals",
+      url: "#",
       icon: <ArrowRightLeftIcon />,
+      items: [
+        {
+          title: "Incoming Referrals",
+          url: "/safesport/physiotherapist/referrals/incoming",
+        },
+        {
+          title: "My Referrals",
+          url: "/safesport/physiotherapist/referrals/mine",
+        },
+        {
+          title: "Completed",
+          url: "/safesport/physiotherapist/referrals/completed",
+        },
+      ],
     },
   ],
   communications: [
     {
       name: "Messages",
-      url: "/safesport/physiotherapist/messages",
+      url: "/safesport/messages",
       icon: <MessageSquareIcon />,
     },
     {
       name: "Notifications",
-      url: "/safesport/physiotherapist/notifications",
+      url: "/safesport/notifications",
       icon: <BellIcon />,
-    },
-  ],
-  records: [
-    {
-      name: "Athlete Profiles",
-      url: "/safesport/physiotherapist/profiles",
-      icon: <UsersIcon />,
-    },
-    {
-      name: "Reports",
-      url: "/safesport/physiotherapist/reports",
-      icon: <FileTextIcon />,
     },
   ],
 };

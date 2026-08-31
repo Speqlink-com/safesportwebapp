@@ -125,7 +125,7 @@ function getRiskLevelVariant(level: string) {
   }
 }
 
-export default function ClinicianScreeningsPage() {
+export default function PhysiotherapistScreeningsPage() {
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
   const [athleteFilter, setAthleteFilter] = useState("all");
@@ -528,7 +528,7 @@ export default function ClinicianScreeningsPage() {
                     <TableCell>
                       <div className="flex items-center gap-2">
                         <Link
-                          href={`/safesport/clinician/screenings/${screening.id}`}
+                          href={`/safesport/physiotherapist/screenings/${screening.id}`}
                           passHref
                         >
                           <Button variant="ghost" size="sm">

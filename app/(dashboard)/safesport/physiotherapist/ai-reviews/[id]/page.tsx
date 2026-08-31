@@ -63,7 +63,7 @@ export default function AIReviewDetailPage() {
           <p className="text-sm text-muted-foreground mb-6">
             The screening you're looking for doesn't exist or has been removed.
           </p>
-          <Link href="/safesport/clinician/ai-reviews">
+          <Link href="/safesport/physiotherapist/ai-reviews">
             <Button>Return to AI Reviews</Button>
           </Link>
         </Card>
@@ -95,7 +95,7 @@ export default function AIReviewDetailPage() {
     console.log("Completed review:", { clinicalInterpretation, reviewerAction });
     
     // Navigate back to list
-    router.push("/safesport/clinician/ai-reviews");
+    router.push("/safesport/physiotherapist/ai-reviews");
   };
 
   const getRiskIcon = (riskLevel: string) => {
@@ -133,7 +133,7 @@ export default function AIReviewDetailPage() {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-4">
-          <Link href="/safesport/clinician/ai-reviews">
+          <Link href="/safesport/physiotherapist/ai-reviews">
             <Button variant="ghost" size="icon">
               <ArrowLeftIcon className="size-5" />
             </Button>
@@ -523,7 +523,7 @@ export default function AIReviewDetailPage() {
                 variant="ghost"
                 className="w-full"
                 size="sm"
-                onClick={() => router.push("/safesport/clinician/ai-reviews")}
+                onClick={() => router.push("/safesport/physiotherapist/ai-reviews")}
               >
                 Cancel
               </Button>

@@ -127,7 +127,7 @@ export default function ScreeningDetailPage() {
           <p className="text-muted-foreground mb-4">
             The screening you're looking for doesn't exist or has been removed.
           </p>
-          <Link href="/safesport/clinician/screenings">
+          <Link href="/safesport/physiotherapist/screenings">
             <Button>Back to Screenings</Button>
           </Link>
         </div>
@@ -144,7 +144,7 @@ export default function ScreeningDetailPage() {
     setIsSaving(false);
     // In real app, this would save to backend and redirect
     alert("Review saved successfully!");
-    router.push("/safesport/clinician/screenings");
+    router.push("/safesport/physiotherapist/screenings");
   };
 
   const isReviewComplete = clinicalInterpretation.trim() !== "" && reviewerAction !== "";
@@ -156,7 +156,7 @@ export default function ScreeningDetailPage() {
       <div className="border-b px-6 py-4">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-4">
-            <Link href="/safesport/clinician/screenings">
+            <Link href="/safesport/physiotherapist/screenings">
               <Button variant="ghost" size="sm">
                 <ArrowLeft className="mr-2 h-4 w-4" />
                 Back
@@ -454,7 +454,7 @@ export default function ScreeningDetailPage() {
                     </div>
                   </div>
 
-                  <Link href={`/safesport/clinician/athletes/${athlete.id}`} className="block">
+                  <Link href={`/safesport/physiotherapist/athletes/${athlete.id}`} className="block">
                     <Button variant="outline" size="sm" className="w-full">
                       View Full Profile
                     </Button>

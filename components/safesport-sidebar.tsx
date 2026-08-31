@@ -1,8 +1,8 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import { NavMain } from "@/components/nav-main"
-import { NavUser } from "@/components/nav-user"
+import * as React from "react";
+import { NavMain } from "@/components/nav-main";
+import { NavUser } from "@/components/nav-user";
 import {
   Sidebar,
   SidebarContent,
@@ -14,39 +14,39 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
   SidebarRail,
-} from "@/components/ui/sidebar"
-import { ActivityIcon } from "lucide-react"
-import { initializeNotifications } from "@/features/safesport/utils/initializeNotifications"
+} from "@/components/ui/sidebar";
+import { ActivityIcon } from "lucide-react";
+import { initializeNotifications } from "@/features/safesport/utils/initializeNotifications";
 
 interface SafeSportSidebarProps extends React.ComponentProps<typeof Sidebar> {
   navData: {
     user: {
-      name: string
-      email: string
-      avatar: string
-    }
+      name: string;
+      email: string;
+      avatar: string;
+    };
     navMain: Array<{
-      title: string
-      url: string
-      icon?: React.ReactNode
-      isActive?: boolean
+      title: string;
+      url: string;
+      icon?: React.ReactNode;
+      isActive?: boolean;
       items?: Array<{
-        title: string
-        url: string
-      }>
-    }>
+        title: string;
+        url: string;
+      }>;
+    }>;
     communications?: Array<{
-      name: string
-      url: string
-      icon: React.ReactNode
-      badge?: React.ReactNode
-    }>
+      name: string;
+      url: string;
+      icon: React.ReactNode;
+      badge?: React.ReactNode;
+    }>;
     records?: Array<{
-      name: string
-      url: string
-      icon: React.ReactNode
-    }>
-  }
+      name: string;
+      url: string;
+      icon: React.ReactNode;
+    }>;
+  };
 }
 
 export function SafeSportSidebar({ navData, ...props }: SafeSportSidebarProps) {
@@ -74,14 +74,17 @@ export function SafeSportSidebar({ navData, ...props }: SafeSportSidebarProps) {
       </SidebarHeader>
       <SidebarContent>
         <NavMain items={navData.navMain} />
-        
+
         {navData.communications && (
           <SidebarGroup>
             <SidebarGroupLabel>Communication</SidebarGroupLabel>
             <SidebarMenu>
               {navData.communications.map((item) => (
                 <SidebarMenuItem key={item.name}>
-                  <SidebarMenuButton render={<a href={item.url} />} tooltip={item.name}>
+                  <SidebarMenuButton
+                    render={<a href={item.url} />}
+                    tooltip={item.name}
+                  >
                     {item.icon}
                     <span>{item.name}</span>
                     {item.badge}
@@ -91,14 +94,17 @@ export function SafeSportSidebar({ navData, ...props }: SafeSportSidebarProps) {
             </SidebarMenu>
           </SidebarGroup>
         )}
-        
+
         {navData.records && (
           <SidebarGroup>
             <SidebarGroupLabel>Records</SidebarGroupLabel>
             <SidebarMenu>
               {navData.records.map((item) => (
                 <SidebarMenuItem key={item.name}>
-                  <SidebarMenuButton render={<a href={item.url} />} tooltip={item.name}>
+                  <SidebarMenuButton
+                    render={<a href={item.url} />}
+                    tooltip={item.name}
+                  >
                     {item.icon}
                     <span>{item.name}</span>
                   </SidebarMenuButton>
@@ -113,5 +119,5 @@ export function SafeSportSidebar({ navData, ...props }: SafeSportSidebarProps) {
       </SidebarFooter>
       <SidebarRail />
     </Sidebar>
-  )
+  );
 }

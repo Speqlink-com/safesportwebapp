@@ -253,7 +253,7 @@ export default function AIReviewsPage() {
 
                   {/* Action Button */}
                   <div className="flex flex-col items-end gap-2">
-                    <Link href={`/safesport/clinician/ai-reviews/${screening.id}`}>
+                    <Link href={`/safesport/physiotherapist/ai-reviews/${screening.id}`}>
                       <Button size="lg" className="rounded-none">
                         Review
                         <ArrowRightIcon className="ml-2 size-4" />
