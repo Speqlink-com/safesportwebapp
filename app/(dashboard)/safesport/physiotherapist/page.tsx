@@ -324,7 +324,7 @@ export default function PhysiotherapistOverviewPage() {
                         <div className="flex-shrink-0">
                           <Clock className="h-4 w-4 text-muted-foreground" />
                         </div>
-                        <div className="flex-1">
+                        <div className="flex-1" suppressHydrationWarning>
                           <div className="flex items-center gap-2">
                             <span className="text-sm font-medium text-muted-foreground">{task.time}</span>
                             <span className="font-medium">{task.athleteName}</span>
