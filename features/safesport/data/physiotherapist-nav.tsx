@@ -51,26 +51,8 @@ export const physiotherapistNavData = {
     },
     {
       title: "Rehabilitation",
-      url: "#",
+      url: "/safesport/physiotherapist/rehabilitation",
       icon: <HeartPulseIcon />,
-      items: [
-        {
-          title: "Active Rehab",
-          url: "/safesport/physiotherapist/rehabilitation",
-        },
-        {
-          title: "Rehab Plans",
-          url: "/safesport/physiotherapist/plans",
-        },
-        {
-          title: "Progress Reviews",
-          url: "/safesport/physiotherapist/progress",
-        },
-        {
-          title: "Reassessments",
-          url: "/safesport/physiotherapist/reassessments",
-        },
-      ],
     },
     {
       title: "Referrals",
