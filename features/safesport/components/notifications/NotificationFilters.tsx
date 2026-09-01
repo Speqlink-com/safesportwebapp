@@ -30,35 +30,26 @@ export function NotificationFiltersComponent({
   return (
     <Tabs value={activeFilter} onValueChange={handleFilterChange}>
       <TabsList>
-        <TabsTrigger value="all">
+        <TabsTrigger value="all" suppressHydrationWarning>
           All
           {stats?.total > 0 && (
-            <span
-              className="ml-2 text-xs text-muted-foreground"
-              suppressHydrationWarning
-            >
+            <span className="ml-2 text-xs text-muted-foreground">
               {stats?.total}
             </span>
           )}
         </TabsTrigger>
-        <TabsTrigger value="unread">
+        <TabsTrigger value="unread" suppressHydrationWarning>
           Unread
           {stats.unread > 0 && (
-            <span
-              className="ml-2 text-xs text-primary font-semibold"
-              suppressHydrationWarning
-            >
+            <span className="ml-2 text-xs text-primary font-semibold">
               {stats.unread}
             </span>
           )}
         </TabsTrigger>
-        <TabsTrigger value="important">
+        <TabsTrigger value="important" suppressHydrationWarning>
           Important
           {stats.important > 0 && (
-            <span
-              className="ml-2 text-xs text-muted-foreground"
-              suppressHydrationWarning
-            >
+            <span className="ml-2 text-xs text-muted-foreground">
               {stats.important}
             </span>
           )}
