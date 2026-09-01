@@ -47,10 +47,6 @@ export const physiotherapistNavData = {
           title: "AI Reviews",
           url: "/safesport/physiotherapist/ai-reviews",
         },
-        {
-          title: "Functional Baselines",
-          url: "/safesport/physiotherapist/baselines",
-        },
       ],
     },
     {
